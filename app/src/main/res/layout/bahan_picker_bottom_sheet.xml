@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rectangle_rounded_top">
+
+    <View
+        android:id="@+id/dragView"
+        android:layout_width="54dp"
+        android:layout_height="6dp"
+        android:background="@drawable/rectangle_rounded_all"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/closeImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/dragView"
+        android:layout_marginTop="29dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/close"/>
+
+    <TextView
+        android:id="@+id/chooseBahanTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/closeImageView"
+        app:layout_constraintBottom_toBottomOf="@id/closeImageView"
+        app:layout_constraintLeft_toRightOf="@id/closeImageView"
+        android:text="Pilih bahan"
+        android:includeFontPadding="false"
+        android:layout_marginLeft="12dp"
+        android:fontFamily="@font/plus_jakarta_sans_bold"
+        android:textColor="@color/grey_text"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/searchBahanEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/chooseBahanTitleTextView"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:drawableEnd="@drawable/base_icons"
+        android:paddingEnd="16dp"
+        android:hint="Cari bahan"
+        android:textColor="@color/grey_text"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:textSize="14sp"
+        android:textColorHint="#737974"
+        android:background="@drawable/rounded_edit_text"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bahanListRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/searchBahanEditText"
+        android:layout_marginTop="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

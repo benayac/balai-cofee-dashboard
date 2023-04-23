@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="8dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <LinearLayout
+        android:id="@+id/stockLowLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/circle_exclamation"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="true"
+            android:layout_marginLeft="4dp"
+            android:textColor="#D92D20"
+            android:fontFamily="@font/plus_jakarta_sans_regular"
+            android:textSize="8sp"
+            android:text="Stok menipis"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/materialTitleTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="12sp"
+        android:fontFamily="@font/plus_jakarta_sans_semibold"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Santos Blend (gr)"/>
+
+    <TextView
+        android:id="@+id/stokAwalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/materialTitleTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:textSize="11sp"
+        android:text="Stok awal 59"/>
+
+    <TextView
+        android:id="@+id/stokAkhirTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stokAwalTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:textSize="11sp"
+        android:text="Stok akhir 60"/>
+
+    <TextView
+        android:id="@+id/inTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/materialTitleTextView"
+        app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:textSize="11sp"
+        android:text="In 59"/>
+
+    <TextView
+        android:id="@+id/usedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/inTextView"
+        app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:textSize="11sp"
+        android:text="Terpakai 60"/>
+
+    <View
+        android:id="@+id/bottomLineView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_50"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/usedTextView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
