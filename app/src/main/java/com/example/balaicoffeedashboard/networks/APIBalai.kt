@@ -47,4 +47,8 @@ interface APIBalai {
     @GET("/admin/rekap/export")
     @Streaming
     fun exportRekap(@Header("Authorization") authHeader: String, @Query("rekap_date") rekapDate: String): Call<ResponseBody>
+
+    @GET("/admin/rekap/master")
+    @Streaming
+    fun exportMaster(@Header("Authorization") authHeader: String): Call<ResponseBody>
 }

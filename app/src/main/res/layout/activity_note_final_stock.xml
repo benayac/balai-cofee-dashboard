@@ -48,7 +48,7 @@
             android:textColor="@color/white"
             android:layout_marginLeft="16dp"
             android:includeFontPadding="false"
-            android:text="Catat satu stok akhir"/>
+            android:text="Catat stok akhir"/>
 
     </LinearLayout>
 

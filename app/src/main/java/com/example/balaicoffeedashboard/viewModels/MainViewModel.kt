@@ -66,6 +66,65 @@ class MainViewModel: ViewModel() {
         })
     }
 
+    fun downloadExportMaster(auth: String, context: Context) {
+        RetrofitBuilder().getService().exportMaster(auth).enqueue(object: Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    viewModelScope.launch {
+                        withContext(Dispatchers.IO) {
+                            val filename = "balai-kopi-master-export.xlsx"
+                            val file = File(
+                                Environment.getExternalStoragePublicDirectory(
+                                    Environment.DIRECTORY_DOWNLOADS
+                                ), filename
+                            )
+                            var inputStream: InputStream? = null
+                            var outputStream: OutputStream? = null
+                            try {
+                                inputStream = response.body()?.byteStream()
+                                outputStream = FileOutputStream(file)
+
+                                val buffer = ByteArray(4096)
+                                var bytesRead: Int
+                                while (inputStream?.read(buffer)
+                                        .also { bytesRead = it!! } != -1
+                                ) {
+                                    outputStream.write(buffer, 0, bytesRead)
+                                }
+
+                                outputStream.flush()
+
+                                // Add file to Media Store to make it available in the system's Downloads app
+                                MediaScannerConnection.scanFile(
+                                    context,
+                                    arrayOf(file.toString()),
+                                    null,
+                                    null
+                                )
+
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            } finally {
+                                inputStream?.close()
+                                outputStream?.close()
+                            }
+                        }
+                    }
+                }
+                Toast.makeText(context, "File berhasil diunduh ke dalam folder download dengan nama balai-kopi-master-export.xlsx", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(
+                    context,
+                    "Gagal mengunduh ekspor. ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        })
+    }
+
     fun downloadExportRekap(auth: String, rekapDate: String, context: Context) {
         Log.d("DOWNLOADEXPORT", "RekapDate $rekapDate")
         RetrofitBuilder().getService().exportRekap(authHeader = auth, rekapDate = rekapDate)
@@ -118,13 +177,13 @@ class MainViewModel: ViewModel() {
                             }
                         }
                     }
-                    Toast.makeText(context, "File downloaded to downloads directory as balai-kopi-export.xlsx", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "File berhasil diunduh ke dalam folder download dengan nama  balai-kopi-export.xlsx", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     Toast.makeText(
                         context,
-                        "Fail to download export. ${t.message}",
+                        "Gagal mengunduh ekspor. ${t.message}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

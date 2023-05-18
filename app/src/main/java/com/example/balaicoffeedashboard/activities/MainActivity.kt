@@ -85,7 +85,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.getBahanList(sharedPref.authenticationPref, this)
         }
         binding.exportRecapCardView.setOnClickListener {
-            checkPermission()
+            checkPermissionRecap()
+        }
+        binding.exportMasterCardView.setOnClickListener {
+
         }
     }
 
@@ -105,13 +108,23 @@ class MainActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun checkPermission() {
+    private fun checkPermissionRecap() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Request the permission
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION)
         } else {
             // Permission granted, start the download process
             showDatePicker()
+        }
+    }
+
+    private fun checkPermissionMaster() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Request the permission
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION)
+        } else {
+            // Permission granted, start the download process
+
         }
     }
 

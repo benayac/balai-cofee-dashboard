@@ -170,7 +170,7 @@
                        android:layout_marginTop="4dp"
                        android:fontFamily="@font/plus_jakarta_sans_regular"
                        android:textColor="@color/black"
-                       android:text="Catat Satu Stok Akhir"/>
+                       android:text="Catat Stok Akhir"/>
                </LinearLayout>
            </androidx.cardview.widget.CardView>
        </LinearLayout>
@@ -184,45 +184,10 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp">
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/noteAllFinalStockButton"
-                android:layout_width="0dp"
-                android:layout_height="98dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="1dp"
-                app:cardBackgroundColor="@color/white"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:src="@drawable/cart_check"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:textAlignment="center"
-                        android:maxEms="6"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/plus_jakarta_sans_regular"
-                        android:textColor="@color/black"
-                        android:text="Catat Seluruh Stok Akhir"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/correctionButton"
                 android:layout_width="0dp"
                 android:layout_height="98dp"
-                android:layout_marginLeft="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardBackgroundColor="@color/white"
                 android:layout_weight="1">
@@ -283,6 +248,39 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:visibility="invisible"
+                android:id="@+id/noteAllFinalStockButton"
+                android:layout_width="0dp"
+                android:layout_height="98dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="1dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/cart_check"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:maxEms="6"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/plus_jakarta_sans_regular"
+                        android:textColor="@color/black"
+                        android:text="Catat Seluruh Stok Akhir"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
@@ -303,11 +301,32 @@
                 android:fontFamily="@font/plus_jakarta_sans_bold"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Generate Rekap"/>
+                android:text="Rekap Baru"/>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/exportRecapCardView"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/exportMasterCardView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="Unduh Ekspor Rekap"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/exportMasterCardView"
             android:layout_width="0dp"
             android:layout_height="48dp"
             app:cardCornerRadius="12dp"
@@ -324,7 +343,7 @@
                 android:fontFamily="@font/plus_jakarta_sans_bold"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Download Export Rekap"/>
+                android:text="Unduh Ekspor Master"/>
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
