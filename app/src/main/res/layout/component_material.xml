@@ -36,7 +36,7 @@
             android:layout_marginLeft="4dp"
             android:textColor="#D92D20"
             android:fontFamily="@font/plus_jakarta_sans_regular"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:text="Stok menipis"/>
     </LinearLayout>
 
