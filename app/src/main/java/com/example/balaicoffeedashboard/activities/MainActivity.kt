@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             checkPermissionRecap()
         }
         binding.exportMasterCardView.setOnClickListener {
-
+            checkPermissionMaster()
         }
     }
 
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION)
         } else {
             // Permission granted, start the download process
-
+            viewModel.downloadExportMaster(sharedPref.authenticationPref, this)
         }
     }
 

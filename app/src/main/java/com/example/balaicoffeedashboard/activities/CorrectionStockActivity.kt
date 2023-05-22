@@ -59,11 +59,13 @@ class CorrectionStockActivity : AppCompatActivity() {
                     request.stokAwal = rekapToday?.stokAwal
                     request.stokAkhir = rekapToday?.stokAkhir
                     request.inData = binding.quantityEditText.text.toString().toInt()
+                    request.terpakai = request.stokAwal?.plus(request.inData ?: 0)?.minus(request.stokAkhir ?: 0)
                 } else if (viewModel.selectedCorrection.value == SELECTED_CORRECTION_STOK_AKHIR){
                     request.rekapId = rekapToday?.rekapId
                     request.stokAwal = rekapToday?.stokAwal
                     request.stokAkhir = binding.quantityEditText.text.toString().toInt()
                     request.inData = rekapToday?.inData
+                    request.terpakai = request.stokAwal?.plus(request.inData ?: 0)?.minus(request.stokAkhir ?: 0)
                 }
                 request.terpakai = (rekapToday?.stokAwal?.plus(rekapToday.inData ?: 0))?.minus(rekapToday.stokAkhir ?: 0)
                 binding.progressBar.visibility = View.VISIBLE
