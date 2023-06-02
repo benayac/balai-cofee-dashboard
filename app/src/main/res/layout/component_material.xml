@@ -102,6 +102,20 @@
         android:textSize="11sp"
         android:text="Terpakai 60"/>
 
+    <TextView
+        android:id="@+id/minimumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stockLowLinearLayout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/inTextView"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:textSize="11sp"
+        android:text="Minimum 100"/>
+
     <View
         android:id="@+id/bottomLineView"
         android:layout_width="match_parent"

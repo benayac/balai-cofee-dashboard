@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "140322364646",
+    "project_id": "balai-dashboard",
+    "storage_bucket": "balai-dashboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140322364646:android:ebb0b792235fd8a6be2f27",
+        "android_client_info": {
+          "package_name": "com.example.balaicoffeedashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140322364646-8n3316ocfuqtjfg7873f094nl1tnujks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcxX3NtBbgfrHwtdNNXx9DFON1lxiMNNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140322364646-8n3316ocfuqtjfg7873f094nl1tnujks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

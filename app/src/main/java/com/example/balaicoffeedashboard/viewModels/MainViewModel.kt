@@ -1,19 +1,16 @@
 package com.example.balaicoffeedashboard.viewModels
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.media.MediaScannerConnection
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.balaicoffeedashboard.activities.MainActivity
 import com.example.balaicoffeedashboard.models.BaseResponse
 import com.example.balaicoffeedashboard.models.GetBahanIdsResponseModel
+import com.example.balaicoffeedashboard.models.GetBahanLessThanMinimumResponseModel
 import com.example.balaicoffeedashboard.models.RekapTodayRequest
 import com.example.balaicoffeedashboard.networks.RetrofitBuilder
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +28,27 @@ import java.io.OutputStream
 class MainViewModel: ViewModel() {
 
     var bahanIdList: List<Int?>? = null
+    var bahanLessThanMinimum: MutableLiveData<List<String?>> = MutableLiveData()
+
+    fun getBahanLessThanMinimum(auth: String, context: Context) {
+        RetrofitBuilder().getService().getBahanLessThanMinimum(authHeader = auth).enqueue(object:
+        Callback<GetBahanLessThanMinimumResponseModel>{
+            override fun onResponse(
+                call: Call<GetBahanLessThanMinimumResponseModel>,
+                response: Response<GetBahanLessThanMinimumResponseModel>
+            ) {
+                if(response.isSuccessful) {
+                    bahanLessThanMinimum.value = response.body()?.data ?: arrayListOf()
+                }
+            }
+
+            override fun onFailure(call: Call<GetBahanLessThanMinimumResponseModel>, t: Throwable) {
+                Toast.makeText(context, "Gagal mengambil data bahan menipis", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        )
+    }
 
     fun getBahanList(auth: String, context: Context) {
         RetrofitBuilder().getService().getAllBahanId(authHeader = auth).enqueue(object:
@@ -110,8 +128,8 @@ class MainViewModel: ViewModel() {
                             }
                         }
                     }
+                    Toast.makeText(context, "File berhasil diunduh ke dalam folder download dengan nama balai-kopi-master-export.xlsx", Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(context, "File berhasil diunduh ke dalam folder download dengan nama balai-kopi-master-export.xlsx", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

@@ -51,4 +51,7 @@ interface APIBalai {
     @GET("/admin/rekap/master")
     @Streaming
     fun exportMaster(@Header("Authorization") authHeader: String): Call<ResponseBody>
+
+    @GET("/admin/rekap/minimum")
+    fun getBahanLessThanMinimum(@Header("Authorization") authHeader: String): Call<GetBahanLessThanMinimumResponseModel>
 }

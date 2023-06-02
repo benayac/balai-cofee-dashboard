@@ -4,15 +4,21 @@ import android.Manifest
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.balaicoffeedashboard.App
+import com.example.balaicoffeedashboard.MessagingUtil
+import com.example.balaicoffeedashboard.R
 import com.example.balaicoffeedashboard.SharedPref
 import com.example.balaicoffeedashboard.activities.NoteFinalStockActivity.Companion.ACTIVITY_SOURCE_ALL
 import com.example.balaicoffeedashboard.activities.NoteFinalStockActivity.Companion.ACTIVITY_SOURCE_ONE
@@ -34,6 +40,24 @@ class MainActivity : AppCompatActivity() {
     private val sharedPref: SharedPref by lazy { App.prefs!! }
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+    private var canSendNotification: Boolean = false
+    private var messagingUtil: MessagingUtil = MessagingUtil()
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // FCM SDK (and your app) can post notifications.
+            canSendNotification = true
+        } else {
+            Toast.makeText(this, "Tidak bisa mengirimkan notifikasi.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getBahanLessThanMinimum(sharedPref.authenticationPref, this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +70,12 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         setLayout()
+        initObserver()
+        requestPermissionLauncher
     }
 
     private fun setLayout() {
+        binding.informationContentLinearLayout.removeAllViews()
         if(sharedPref.userPrivilegePref == "ADMIN") {
             binding.addNewMaterialButton.visibility = View.VISIBLE
         } else {
@@ -83,12 +110,30 @@ class MainActivity : AppCompatActivity() {
         }
         binding.generateRecapCardView.setOnClickListener {
             viewModel.getBahanList(sharedPref.authenticationPref, this)
+            viewModel.getBahanLessThanMinimum(sharedPref.authenticationPref, this)
         }
         binding.exportRecapCardView.setOnClickListener {
             checkPermissionRecap()
         }
         binding.exportMasterCardView.setOnClickListener {
             checkPermissionMaster()
+        }
+        viewModel.getBahanLessThanMinimum(sharedPref.authenticationPref, this)
+    }
+
+    private fun initObserver() {
+        viewModel.bahanLessThanMinimum.observe(this) { bahanNames ->
+            if(bahanNames.isNotEmpty()) {
+                messagingUtil.sendNotification("Terdapat bahan dengan jumlah di bawah minimal!", "Notifikasi Balai", this, 1, Intent(applicationContext, MainActivity::class.java))
+                binding.informationContentLinearLayout.removeAllViews()
+                bahanNames.forEach{
+                    val tv = TextView(this)
+                    tv.text = it ?: ""
+                    tv.setTextColor(resources.getColor(R.color.black))
+                    binding.informationContentLinearLayout.addView(tv)
+                }
+            }
+
         }
     }
 
