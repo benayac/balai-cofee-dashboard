@@ -28,10 +28,18 @@ class MaterialComponentView: FrameLayout {
         binding.inTextView.text = "In ${bahanRekapData.rekapTodayData?.inData.toString()}"
         binding.usedTextView.text = "Terpakai ${bahanRekapData.rekapTodayData?.terpakai.toString()}"
         binding.minimumTextView.text = "Minimum ${bahanRekapData.bahan?.minimumAmount.toString()}"
-        if ((bahanRekapData.rekapTodayData?.stokAwal ?: 0).plus(bahanRekapData.rekapTodayData?.inData ?: 0) <= (bahanRekapData.bahan?.minimumAmount ?: 0)) {
-            binding.stockLowLinearLayout.visibility = View.VISIBLE
+        if((bahanRekapData.rekapTodayData?.stokAkhir ?: 0) <= 0) {
+            if ((bahanRekapData.rekapTodayData?.stokAwal ?: 0).plus(bahanRekapData.rekapTodayData?.inData ?: 0) <= (bahanRekapData.bahan?.minimumAmount ?: 0)) {
+                binding.stockLowLinearLayout.visibility = View.VISIBLE
+            } else {
+                binding.stockLowLinearLayout.visibility = View.GONE
+            }
         } else {
-            binding.stockLowLinearLayout.visibility = View.GONE
+            if ((bahanRekapData.rekapTodayData?.stokAkhir ?: 0) <= (bahanRekapData.bahan?.minimumAmount ?: 0)) {
+                binding.stockLowLinearLayout.visibility = View.VISIBLE
+            } else {
+                binding.stockLowLinearLayout.visibility = View.GONE
+            }
         }
     }
 }
